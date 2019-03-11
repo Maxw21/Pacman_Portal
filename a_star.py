@@ -1,3 +1,8 @@
+"""
+Credit of Implementation
+Previously translated into python by Maxfield Wilhoite.
+"""
+
 from point import Point
 
 
