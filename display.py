@@ -27,6 +27,7 @@ class Display:
         self.ghosts = Group()
         self.create_start_images = True
         self.animate_time = 0
+        self.pacman_start = None
 
     def update_screen(self):
         """Update image on the screen."""
@@ -76,6 +77,7 @@ class Display:
                 ghost.switch_image()
             self.animate_time = 0
         self.animate_time += 1
+        self.pacman.switch_images()
 
     def draw_high_scores(self):
         """Draw the high scores on the high score page"""
@@ -130,6 +132,8 @@ class Display:
         clyde_name_rect.y += 12
         clyde_name_rect.x += 100
         self.screen.blit(clyde_name, clyde_name_rect)
+        self.pacman.rect.centerx = self.screen.get_rect().centerx
+        self.pacman.blitme()
 
     def create_start_objects(self):
         """Creae the ghosts and pacman once."""
@@ -156,3 +160,6 @@ class Display:
                       start_position=Point(self.screen.get_rect().centerx - 40, self.screen.get_rect().centery),
                       indicator=3, a_star=self.maze.a_star, pacman=self.pacman, nodes=self.maze.nodes)
         self.ghosts.add(ghost)
+        self.pacman_start = Pacman(screen=self.screen, game_settings=self.game_settings, stats=self.stats, sb=self.sb,
+                                   image_list=self.sprite_sheet.pacman_image,
+                                   death_anim_list=self.sprite_sheet.pacman_death_image, sounds=self.sounds)
